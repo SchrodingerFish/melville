@@ -1,0 +1,72 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /melville
+spring:
+  profiles:
+    active: dev
+  application:
+    name: melville
+  ai:
+    openai:
+      base-url: https://api.cherryred.xyz/v1
+      api-key: sk-x
+  thymeleaf:
+    cache: false
+    mode: HTML
+    suffix: .html
+    encoding: UTF-8
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: com.cn.melville.*
+# knife4j的增强配置，不需要增强可以不配
+knife4j:
+  enable: true
+  gateway:
+    enable: true
+    routes:
+      - name: 用户服务
+        url: /user-service/v2/api-docs?group=default
+        service-name: user-service
+        order: 2
+      - name: 订单服务
+        url: /order-service/v2/api-docs?group=default
+        service-name: order-service
+        order: 3
+  setting:
+    language: zh-CN
+    enable-swagger-models: true
+    enable-document-manage: true
+    swagger-model-name: 实体类列表
+    enable-version: false
+    enable-reload-cache-parameter: false
+    enable-after-script: true
+    enable-filter-multipart-api-method-type: POST
+    enable-filter-multipart-apis: false
+    enable-request-cache: true
+    enable-host: false
+    enable-host-text: 192.168.0.193:8000
+#    enable-home-custom: true
+#    home-custom-path: classpath:markdown/home.md
+    enable-search: false
+    enable-footer: false
+    enable-footer-custom: true
+    footer-custom-content: Apache License 2.0 | Copyright  2019-[浙江八一菜刀股份有限公司](https://gitee.com/xiaoym/knife4j)
+    enable-dynamic-parameter: false
+    enable-debug: true
+    enable-open-api: false
+    enable-group: true
+  cors: false
+  production: false
+  basic:
+    enable: true
+    username: admin
+    password: 123456

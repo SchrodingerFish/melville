@@ -1,0 +1,66 @@
+debug: false
+logging:
+  level:
+    web: debug
+spring:
+  datasource:
+    primary-pg:
+      url: jdbc:postgresql://192.168.1.6:5432/mine
+      driver-class-name: org.postgresql.Driver
+      username: postgres
+      password: xxx
+      hikari: # HikariCP Specific Configuration
+        pool-name: primary-pg-pool
+        maximum-pool-size: 10
+        minimum-idle: 5
+        connection-timeout: 30000
+        idle-timeout: 600000
+        max-lifetime: 1800000
+    secondary-pg:
+      url: jdbc:postgresql://192.168.1.6:5432/second
+      driver-class-name: org.postgresql.Driver
+      username: postgres
+      password: xxx
+      hikari: # HikariCP Specific Configuration
+        pool-name: secondary-pg-pool
+        maximum-pool-size: 5
+        minimum-idle: 2
+        connection-timeout: 30000
+        idle-timeout: 600000
+        max-lifetime: 1800000
+    sqlite:
+      url: jdbc:sqlite:src/main/resources/data/sqlite.db
+      driver-class-name: org.sqlite.JDBC
+      username:   # SQLite 不需要用户名
+      password:   # SQLite 不需要密码
+      hikari: # HikariCP Specific Configuration (Even for SQLite!)
+        pool-name: sqlite-pool
+        maximum-pool-size: 1
+        minimum-idle: 1
+        connection-timeout: 30000
+        idle-timeout: 600000
+        max-lifetime: 1800000 # These settings are mostly for consistency.  SQLite effectively uses a single connection.
+    mysql:
+      url: jdbc:mysql://192.168.1.6:3306/mine?serverTimezone=UTC
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: xxx
+      hikari: # HikariCP Specific Configuration
+        pool-name: mysql-pool
+        maximum-pool-size: 10
+        minimum-idle: 5
+        connection-timeout: 30000
+        idle-timeout: 600000
+        max-lifetime: 1800000
+  redis:
+    host: 192.168.1.6
+    port: 6379
+    password: xxx
+    database: 0
+    timeout: 10000
+    jedis:
+      pool:
+        max-active: 10
+        max-wait: -1
+        min-idle: 5
+        max-idle: 10

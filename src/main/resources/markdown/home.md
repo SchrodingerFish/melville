@@ -1,0 +1,2 @@
+## Index
+- [Home](home.md)
