@@ -29,9 +29,9 @@ public class TestService {
     public void doSomething() {
         // 使用不同的 JdbcTemplate 操作不同的数据库
         String version = primaryPgJdbcTemplate.queryForObject("select version()", String.class);
-        String version2 = secondaryPgJdbcTemplate.queryForObject("select 1", String.class);
-        String version3 = sqliteJdbcTemplate.queryForObject("select 1", String.class);
-        String version4 = mysqlJdbcTemplate.queryForObject("select 1", String.class);
+        String version2 = secondaryPgJdbcTemplate.queryForObject("select version()", String.class);
+        String version3 = sqliteJdbcTemplate.queryForObject("select sqlite_version()", String.class);
+        String version4 = mysqlJdbcTemplate.queryForObject("select version()", String.class);
         // Process the data as needed
         System.out.println("Primary PG Data: " + version);
         System.out.println("Secondary PG Data: " + version2);
