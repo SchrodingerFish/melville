@@ -46,6 +46,37 @@ public class BingImageApi {
         }
     }
 
+    public static List<ImageDownloaderVirtualThreads.ImageInfo> getImageListNew() throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(API_URL))
+                .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        if (response.statusCode() == 200) {
+            String jsonResponse = response.body();
+            return parseImageListNew(jsonResponse);
+        } else {
+            System.err.println("API 请求失败，状态码: " + response.statusCode());
+            return Collections.emptyList();
+        }
+    }
+
+    private static List<ImageDownloaderVirtualThreads.ImageInfo> parseImageListNew(String jsonResponse) {
+        Gson gson = new Gson();
+        TypeToken<ApiResponseNew> typeToken = new TypeToken<ApiResponseNew>() {};
+
+        ApiResponseNew apiResponse = gson.fromJson(jsonResponse, typeToken.getType());
+        if (apiResponse != null && apiResponse.getList() != null) {
+            return apiResponse.getList();
+        } else {
+            System.err.println("JSON 解析失败或列表为空");
+            return Collections.emptyList();
+        }
+    }
+
     static class ApiResponse {
         private List<ImageDownloader.ImageInfo> list;
 
@@ -54,6 +85,25 @@ public class BingImageApi {
         }
 
         public void setList(List<ImageDownloader.ImageInfo> list) {
+            this.list = list;
+        }
+
+        @Override
+        public String toString() {
+            return "ApiResponse{" +
+                    "list=" + list +
+                    '}';
+        }
+    }
+
+    static class ApiResponseNew {
+        private List<ImageDownloaderVirtualThreads.ImageInfo> list;
+
+        public List<ImageDownloaderVirtualThreads.ImageInfo> getList() {
+            return list;
+        }
+
+        public void setList(List<ImageDownloaderVirtualThreads.ImageInfo> list) {
             this.list = list;
         }
 
