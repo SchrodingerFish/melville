@@ -1,9 +1,8 @@
-package com.cn.melville.service;
+package com.cn.melville.service.impl;
 
 import com.cn.melville.model.User;
 import com.cn.melville.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BeanPropertyBindingResult;

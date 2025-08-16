@@ -2,7 +2,21 @@ debug: false
 logging:
   level:
     web: debug
+rabbitmq:
+  exchange: test.exchange
+  queue: test.queue
+  routingkey: test.routing.key
 spring:
+  rabbitmq:
+    host: xxxx
+    port: 5672
+    username: xxxx
+    password: xxxx
+    virtual-host: /
+  ai:
+    openai:
+      base-url: ${OPENAI_API_BASE}
+      api-key: ${OPENAI_API_KEY}
   datasource:
     primary-pg:
       url: jdbc:postgresql://192.168.1.6:5432/mine

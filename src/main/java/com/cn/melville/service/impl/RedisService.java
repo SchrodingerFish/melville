@@ -1,4 +1,4 @@
-package com.cn.melville.service;
+package com.cn.melville.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;

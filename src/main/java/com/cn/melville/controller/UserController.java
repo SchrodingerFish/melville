@@ -1,9 +1,8 @@
 package com.cn.melville.controller;
 
 import com.cn.melville.common.Result;
-import com.cn.melville.exception.BusinessException;
 import com.cn.melville.model.User;
-import com.cn.melville.service.UserService;
+import com.cn.melville.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
